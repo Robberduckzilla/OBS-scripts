@@ -1,6 +1,6 @@
-#
 # Author:   Robberduckzilla
 # Version:  0.1
+
 import obspython as obs
 from pathlib import Path
 from datetime import datetime
@@ -14,7 +14,7 @@ class CountdownToSleep:
     def update_text(self, force=False, updateTime=True):
         source = obs.obs_get_source_by_name(self.source_name)
         if source is not None:
-            if(Data._visible_ and not Data._timerRunning_):
+            if  not Data._timerRunning_:
                 countdown = ''
             else:
                 countdown = self.get_formatted_time()
@@ -35,6 +35,7 @@ class CountdownToSleep:
         
         # calculate total seconds until the date
         time_until_sleep = int((datetime(2021, 4, 11, 12, 0, 0) - datetime.now()).total_seconds())
+        
         # prevent negative seconds
         if time_until_sleep <= 0:
             time_until_sleep = 0
