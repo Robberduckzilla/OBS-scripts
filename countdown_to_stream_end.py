@@ -33,13 +33,17 @@ class CountdownToSleep:
     def get_formatted_time(self):
         countdown = Data._format_
         
+        # calculate total seconds until the date
         time_until_sleep = int((datetime(2021, 4, 11, 12, 0, 0) - datetime.now()).total_seconds())
+        # prevent negative seconds
         if time_until_sleep <= 0:
             time_until_sleep = 0
         
+        # turn seconds into hours and minutes
         hours, remainder = divmod(time_until_sleep, 3600)
         minutes, seconds = divmod(remainder, 60)
         
+        #format hours minutes and seconds into two-digit strings(e.g. '04' instead of '4')
         hours = f'{int(hours):02}'
         minutes = f'{int(minutes):02}'
         seconds = f'{int(seconds):02}'
@@ -72,7 +76,7 @@ def start_pressed(props, prop):
 
 def on_event(event):
     #if both autostart and autostop are diabled just return
-    if not Data._autoStart_ : return
+    if not Data._autoStart_: return
 
     #stream start
     if event == obs.OBS_FRONTEND_EVENT_STREAMING_STARTED and Data._autoStart_:
