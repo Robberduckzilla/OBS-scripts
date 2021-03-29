@@ -111,7 +111,7 @@ def script_properties():
 
     obs.obs_properties_add_text(props, 'format', 'Text Format:', obs.OBS_TEXT_DEFAULT)
     obs.obs_properties_add_button(props, 'start_button', 'Start Timer', start_pressed)
-    obs.obs_properties_add_bool(props, 'auto_start', 'Start Automatically with Stream/Recording')
+    obs.obs_properties_add_bool(props, 'auto_start', 'Start Automatically with Stream')
 
     return props
 
