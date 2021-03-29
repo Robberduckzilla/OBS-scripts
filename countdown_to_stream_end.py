@@ -59,8 +59,8 @@ class Data:
     _visible_ = False
     _timerRunning_ = False
 
-liveTime = CountdownToSleep()
-callback = liveTime.update_text
+sleep_countdown = CountdownToSleep()
+callback = sleep_countdown.update_text
 
 # ---------------------------- helper methods --------------------------------------
 
@@ -75,22 +75,22 @@ def start_pressed(props, prop):
 
 def on_event(event):
     #if both autostart and autostop are diabled just return
-    if not Data._autoStart_ and not Data._autoStop_: return
+    if not Data._autoStart_ : return
 
     #stream start
     if event == obs.OBS_FRONTEND_EVENT_STREAMING_STARTED and Data._autoStart_:
-        if liveTime.source_name != "":
+        if sleep_countdown.source_name != "":
             start_timer()
 
 # -------------------------------------- script methods ----------------------------------------
 
 def script_update(settings):
-    liveTime.source_name = obs.obs_data_get_string(settings, "source")
+    sleep_countdown.source_name = obs.obs_data_get_string(settings, "source")
     Data._format_ = obs.obs_data_get_string(settings, "format")
     Data._autoStart_ = obs.obs_data_get_bool(settings, "auto_start")
 
     #force the text to update and do not increment the timer
-    liveTime.update_text(True, False)
+    sleep_countdown.update_text(True, False)
 
 def script_properties():
     props = obs.obs_properties_create()
