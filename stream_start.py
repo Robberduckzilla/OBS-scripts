@@ -5,11 +5,12 @@ import obspython as obs
 from pathlib import Path
 from datetime import datetime
 
-class CountdownToSleep:
+class CountdownToStream:
     def __init__(self,source_name=None):
         self.source_name = source_name
         self.lastCount = ''
-        self.seconds_till_sleep = 0
+        self.lines = open("input.txt", "r").readlines()
+        self.line_index = 0
 
     def update_text(self, force=False, updateTime=True):
         source = obs.obs_get_source_by_name(self.source_name)
@@ -34,23 +35,27 @@ class CountdownToSleep:
         countdown = Data._format_
         
         # calculate total seconds until the date
-        time_until_sleep = int((datetime(2021, 4, 11, 12, 0, 0) - datetime.now()).total_seconds())
+        time_until_stream = int((datetime(2021, 4, 10, 12, 0, 0) - datetime.now()).total_seconds())
         # prevent negative seconds
-        if time_until_sleep <= 0:
-            time_until_sleep = 0
+        if time_until_stream <= 0:
+            time_until_stream = 0
         
         # turn seconds into hours and minutes
-        hours, remainder = divmod(time_until_sleep, 3600)
+        hours, remainder = divmod(time_until_stream, 3600)
         minutes, seconds = divmod(remainder, 60)
         
         #format hours minutes and seconds into two-digit strings(e.g. '04' instead of '4')
         hours = f'{int(hours):02}'
         minutes = f'{int(minutes):02}'
         seconds = f'{int(seconds):02}'
-         
        
         if '{time}' in Data._format_:
             countdown = str.replace(countdown, '{time}', f'{hours}:{minutes}')
+
+        next_line = self.lines[self.line_index]
+        
+        if '{text}' in Data._format_:
+            countdown = str.replace(countdown, '{time}', f'{next_line}')
 
         return countdown
 
@@ -60,8 +65,8 @@ class Data:
     _autoStart_ = False
     _timerRunning_ = False
 
-sleep_countdown = CountdownToSleep()
-callback = sleep_countdown.update_text
+stream_countdown = CountdownToStream()
+callback = stream_countdown.update_text
 
 # ---------------------------- helper methods --------------------------------------
 
@@ -80,18 +85,18 @@ def on_event(event):
 
     #stream start
     if event == obs.OBS_FRONTEND_EVENT_STREAMING_STARTED and Data._autoStart_:
-        if sleep_countdown.source_name != '':
+        if stream_countdown.source_name != '':
             start_timer()
 
 # -------------------------------------- script methods ----------------------------------------
 
 def script_update(settings):
-    sleep_countdown.source_name = obs.obs_data_get_string(settings, 'source')
+    stream_countdown.source_name = obs.obs_data_get_string(settings, 'source')
     Data._format_ = obs.obs_data_get_string(settings, 'format')
     Data._autoStart_ = obs.obs_data_get_bool(settings, 'auto_start')
 
     #force the text to update and do not increment the timer
-    sleep_countdown.update_text(True, False)
+    stream_countdown.update_text(True, False)
 
 def script_properties():
     props = obs.obs_properties_create()

@@ -1,0 +1,4 @@
+Roses are red.
+Minecraft is green.
+Python outputs text...
+... onto your screen.
