@@ -8,31 +8,31 @@ from datetime import datetime
 class CountdownToStream:
     def __init__(self,source_name=None):
         self.source_name = source_name
-        self.lastCount = ''
-        self.lines = open("input.txt", "r").readlines()
+        self.lines = open("C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input.txt", "r").readlines()
         self.line_index = 0
+        self.line_change_frequency_seconds = 4
 
     def update_text(self, force=False, updateTime=True):
         source = obs.obs_get_source_by_name(self.source_name)
         if source is not None:
             if not Data._timerRunning_:
-                countdown = ''
+                text_output = ''
             else:
-                countdown = self.get_formatted_time()
+                text_output = self.get_formatted_time()
 
             #prevent more work being done than necessary
-            if(countdown == self.lastCount and not force):
+            if(text_output == self.lastCount and not force):
                 return
 
-            self.lastCount = countdown
+            self.lastCount = text_output
             settings = obs.obs_data_create()
-            obs.obs_data_set_string(settings, 'text', countdown)
+            obs.obs_data_set_string(settings, 'text', text_output)
             obs.obs_source_update(source, settings)
             obs.obs_data_release(settings)
             obs.obs_source_release(source)
 
     def get_formatted_time(self):
-        countdown = Data._format_
+        text_output = Data._format_
         
         # calculate total seconds until the date
         time_until_stream = int((datetime(2021, 4, 10, 12, 0, 0) - datetime.now()).total_seconds())
@@ -49,15 +49,20 @@ class CountdownToStream:
         minutes = f'{int(minutes):02}'
         seconds = f'{int(seconds):02}'
        
+        if time_until_stream % self.line_change_frequency_seconds == 0:            
+            self.line_index +=1
+            if self.line_index >= len(self.lines):
+                self.line_index = 0
+
         if '{time}' in Data._format_:
-            countdown = str.replace(countdown, '{time}', f'{hours}:{minutes}')
+            text_output = str.replace(text_output, '{time}', f'{hours}:{minutes}')
 
         next_line = self.lines[self.line_index]
-        
-        if '{text}' in Data._format_:
-            countdown = str.replace(countdown, '{time}', f'{next_line}')
 
-        return countdown
+        if '{text}' in Data._format_:
+            text_output = str.replace(text_output, '{text}', f'{next_line}')
+
+        return text_output
 
 class Data:
     _defaultFormat_ = '{time}'

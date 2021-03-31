@@ -55,7 +55,7 @@ class CountdownToSleep:
         return countdown
 
 class Data:
-    _defaultFormat_ = '{time}'
+    _defaultFormat_ = '{time} {text}'
     _format_ = _defaultFormat_
     _autoStart_ = False
     _timerRunning_ = False
