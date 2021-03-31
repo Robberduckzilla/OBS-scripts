@@ -14,7 +14,7 @@ while(True):
     timestamp = datetime.datetime.now().strftime(r'%Y-%m-%d_%H-%M')
     directory = dest + timestamp + "/"
     os.makedirs(os.path.dirname(directory), exist_ok=True)
-    shutil.copytree(full_file_name, directory + file_name) 
+    shutil.copytree(source, directory) 
     
     i+=1
     print(f'Backups so far: {i}')
