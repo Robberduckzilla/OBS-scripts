@@ -1,6 +1,7 @@
 import datetime
 import os
 import shutil
+from shutil import ignore_patterns
 import time
 
 delay_in_minutes = 30
