@@ -14,7 +14,7 @@ i=0
 while(True):
     timestamp = datetime.datetime.now().strftime(r'%Y-%m-%d_%H-%M')
     directory = dest + timestamp + '/'
-    shutil.copytree(source, directory) 
+    shutil.copytree(source, directory, ignore=ignore_patterns('*LOCK','*.pyc')) 
     
     i+=1
     print(f'Backups so far: {i}')
