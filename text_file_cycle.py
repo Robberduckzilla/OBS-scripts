@@ -14,7 +14,9 @@ class CountdownToStream:
         self.line_change_frequency_seconds = 1
         self.lastCount = ''
 
-
+    def update_frequency(self, frequency_in_seconds):
+        self.line_change_frequency_seconds = frequency_in_seconds
+        
     def update_text(self, force=False, updateTime=True):
     """
     ¯\_(ツ)_/¯
