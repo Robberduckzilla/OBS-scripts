@@ -7,12 +7,12 @@ from datetime import datetime
 import random
 import sys
 
-seconds_between_lines = 10
 
 class TextCycler:
     def __init__(self, source_name=None):
-        
-        self.lines = [x for x in open('C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input.txt', 'r').readlines() if x != '']
+
+        self.lines = [x for x in open(
+            'C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input.txt', 'r').readlines() if x != '']
         random.shuffle(self.lines)
         self.source_name = source_name
         self.line_index = 0
@@ -20,7 +20,7 @@ class TextCycler:
 
     def update_frequency(self, frequency_in_seconds):
         self.line_change_frequency_seconds = frequency_in_seconds
-        
+
     def update_text(self, force=False):
         """
         ¯\_(ツ)_/¯
@@ -30,7 +30,7 @@ class TextCycler:
             if Data._timerRunning_:
                 text_output = self.choose_text_line()
 
-            #prevent more work being done than necessary
+            # prevent more work being done than necessary
             if(text_output == self.lastCount and not force):
                 return
             self.lastCount = text_output
@@ -44,13 +44,14 @@ class TextCycler:
     def choose_text_line(self):
         text_output = Data._format_
 
-        self.line_index +=1
+        self.line_index += 1
         if self.line_index >= len(self.lines):
             self.line_index = 0
-        next_line = self.lines[self.line_index].strip()        
+        next_line = self.lines[self.line_index].strip()
         if '{text}' in Data._format_:
             text_output = str.replace(text_output, '{text}', f'{next_line}')
         return text_output
+
 
 class Data:
     _defaultFormat_ = '{text}'
@@ -59,32 +60,39 @@ class Data:
     _timerRunning_ = True
     _timeBetweenMessages_ = 1
 
+
 text_cycler = TextCycler()
 callback = text_cycler.update_text
 
 # ---------------------------- helper methods --------------------------------------
+
 
 def start_timer():
     obs.timer_remove(callback)
     obs.timer_add(callback, Data._timeBetweenMessages_ * 1000)
     Data._timerRunning_ = True
 
+
 def stop_timer():
     Data._timerRunning_ = False
 # --------------------------- callbacks ---------------------------------------------
+
 
 def start_pressed(props, prop):
     start_timer()
 
 # -------------------------------------- script methods ----------------------------------------
 
+
 def script_update(settings):
     text_cycler.source_name = obs.obs_data_get_string(settings, 'source')
     Data._format_ = obs.obs_data_get_string(settings, 'format')
-    Data._timeBetweenMessages_ = obs.obs_data_get_int(settings, 'seconds_between_lines')
+    Data._timeBetweenMessages_ = obs.obs_data_get_int(
+        settings, 'seconds_between_lines')
 
     # force the text to update and do not increment the timer
     # text_cycler.update_text(True)
+
 
 def script_properties():
     props = obs.obs_properties_create()
@@ -106,18 +114,23 @@ def script_properties():
 
         obs.source_list_release(sources)
 
-    obs.obs_properties_add_text(props, 'format', 'Text Format:', obs.OBS_TEXT_DEFAULT)
-    obs.obs_properties_add_int_slider(props, 'seconds_between_lines', 'Seconds Between:', 1, 60, 1)
-    obs.obs_properties_add_button(props, 'start_button', 'Start Cycling', start_pressed)
+    obs.obs_properties_add_text(
+        props, 'format', 'Text Format:', obs.OBS_TEXT_DEFAULT)
+    obs.obs_properties_add_int_slider(
+        props, 'seconds_between_lines', 'Seconds Between:', 1, 60, 1)
+    obs.obs_properties_add_button(
+        props, 'start_button', 'Start Cycling', start_pressed)
 
     return props
 
+
 def script_load(settings):
     Data._format_ = obs.obs_data_get_string(settings, 'format')
-    Data._timeBetweenMessages_ = obs.obs_data_get_int(settings, 'seconds_between_lines')
+    Data._timeBetweenMessages_ = obs.obs_data_get_int(
+        settings, 'seconds_between_lines')
     if not Data._format_:
         Data._format_ = Data._defaultFormat_
 
     obs.obs_data_set_string(settings, 'format', Data._format_)
-    obs.obs_data_set_int(settings, 'seconds_between_lines', Data._timeBetweenMessages_)
-    
+    obs.obs_data_set_int(settings, 'seconds_between_lines',
+                         Data._timeBetweenMessages_)
