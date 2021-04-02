@@ -16,7 +16,8 @@ class CountdownToStream:
 
 
     def update_text(self, force=False, updateTime=True):
-    """ ¯\_(ツ)_/¯
+    """
+    ¯\_(ツ)_/¯
     """
         source = obs.obs_get_source_by_name(self.source_name)
         if source is not None:
