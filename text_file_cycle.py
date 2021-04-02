@@ -4,13 +4,15 @@
 import obspython as obs
 from pathlib import Path
 from datetime import datetime
+import random
 
 class CountdownToStream:
     def __init__(self,source_name=None):
         self.source_name = source_name
-        self.lines = open("C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input.txt", "r").readlines()
+        self.lines = random.shuffle([x for x in open('C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input.txt', 'r').readlines() if x !=''])
         self.line_index = 0
-        self.line_change_frequency_seconds = 4
+        self.line_change_frequency_seconds = 1
+        self.lastCount = ''
 
     def update_text(self, force=False, updateTime=True):
         source = obs.obs_get_source_by_name(self.source_name)
@@ -39,23 +41,11 @@ class CountdownToStream:
         # prevent negative seconds
         if time_until_stream <= 0:
             time_until_stream = 0
-        
-        # turn seconds into hours and minutes
-        hours, remainder = divmod(time_until_stream, 3600)
-        minutes, seconds = divmod(remainder, 60)
-        
-        #format hours minutes and seconds into two-digit strings(e.g. '04' instead of '4')
-        hours = f'{int(hours):02}'
-        minutes = f'{int(minutes):02}'
-        seconds = f'{int(seconds):02}'
        
         if time_until_stream % self.line_change_frequency_seconds == 0:            
             self.line_index +=1
             if self.line_index >= len(self.lines):
                 self.line_index = 0
-
-        if '{time}' in Data._format_:
-            text_output = str.replace(text_output, '{time}', f'{hours}:{minutes}')
 
         next_line = self.lines[self.line_index]
 
@@ -65,10 +55,10 @@ class CountdownToStream:
         return text_output
 
 class Data:
-    _defaultFormat_ = '{time}'
+    _defaultFormat_ = '{text}'
     _format_ = _defaultFormat_
-    _autoStart_ = False
-    _timerRunning_ = False
+    _autoStart_ = True
+    _timerRunning_ = True
 
 stream_countdown = CountdownToStream()
 callback = stream_countdown.update_text
