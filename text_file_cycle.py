@@ -1,5 +1,5 @@
 # Author:   Robberduckzilla
-# Version:  0.1
+# Version:  0.1b
 
 import obspython as obs
 from pathlib import Path
