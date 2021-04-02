@@ -14,7 +14,10 @@ class CountdownToStream:
         self.line_change_frequency_seconds = 1
         self.lastCount = ''
 
+
     def update_text(self, force=False, updateTime=True):
+    """ ¯\_(ツ)_/¯
+    """
         source = obs.obs_get_source_by_name(self.source_name)
         if source is not None:
             if not Data._timerRunning_:
