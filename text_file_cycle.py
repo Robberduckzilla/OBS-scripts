@@ -12,7 +12,8 @@ class TextCycler:
     def __init__(self, source_name=None):
 
         self.lines = [x for x in open(
-            'C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input.txt', 'r').readlines() if x != '']
+            'C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input.txt',
+            'r').readlines() if x != '']
         random.shuffle(self.lines)
         self.source_name = source_name
         self.line_index = 0
@@ -64,8 +65,6 @@ class Data:
 text_cycler = TextCycler()
 callback = text_cycler.update_text
 
-# ---------------------------- helper methods --------------------------------------
-
 
 def start_timer():
     obs.timer_remove(callback)
@@ -75,13 +74,9 @@ def start_timer():
 
 def stop_timer():
     Data._timerRunning_ = False
-# --------------------------- callbacks ---------------------------------------------
-
 
 def start_pressed(props, prop):
     start_timer()
-
-# -------------------------------------- script methods ----------------------------------------
 
 
 def script_update(settings):
