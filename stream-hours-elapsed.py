@@ -36,7 +36,7 @@ class CountdownToSleep:
         # calculate total seconds until the date
         time_until_sleep = int(
           (
-            datetime.now() - datetime(2021, 4, 2, 12, 0, 0)
+            datetime.now() - datetime(2021, 4, 10, 12, 0, 0)
           ).total_seconds()
         )
         # prevent negative seconds
