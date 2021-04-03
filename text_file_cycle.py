@@ -12,7 +12,7 @@ class TextCycler:
     def __init__(self, source_name=None):
 
         self.lines = [x for x in open(
-            'C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input.txt',
+            'C:/Users/Isabelle/iCloudDrive/01 Design/personal OBS graphics/OBS-scripts/input.txt',
             'r').readlines() if x != '']
         random.shuffle(self.lines)
         self.source_name = source_name
