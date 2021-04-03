@@ -34,23 +34,25 @@ class CountdownToSleep:
         countdown = Data._format_
         
         # calculate total seconds until the date
-        time_until_sleep = int(datetime.now() - datetime(2021, 4, 2, 12, 0, 0)).total_seconds())
+        time_until_sleep = int(
+            (
+                datetime(2021, 4, 10, 12, 0, 0) - datetime.now()
+            ).total_seconds()
+        )
         # prevent negative seconds
         if time_until_sleep <= 0:
             time_until_sleep = 0
         
         # turn seconds into hours and minutes
-        hours, remainder = divmod(time_until_sleep, 3600)
-        minutes, seconds = divmod(remainder, 60)
+        minutes, seconds = divmod(time_until_sleep, 60)
         
         #format hours minutes and seconds into two-digit strings(e.g. '04' instead of '4')
-        hours = f'{int(hours):02}'
         minutes = f'{int(minutes):02}'
         seconds = f'{int(seconds):02}'
          
        
         if '{time}' in Data._format_:
-            countdown = str.replace(countdown, '{time}', f'{hours}')
+            countdown = str.replace(countdown, '{time}', f'{minutes}:{seconds}')
 
         return countdown
 
