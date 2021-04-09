@@ -47,12 +47,14 @@ class CountdownToSleep:
         hours, remainder = divmod(time_until_sleep, 3600)
         minutes, seconds = divmod(remainder, 60)
         
+        hours += 1 # Client request
+        
         #format hours minutes and seconds into two-digit strings(e.g. '04' instead of '4')
         hours = f'{int(hours):02}'
         minutes = f'{int(minutes):02}'
         seconds = f'{int(seconds):02}'
          
-        hours += 1 # Client request
+
 
         if '{time}' in Data._format_:
             countdown = str.replace(countdown, '{time}', f'{hours}')
