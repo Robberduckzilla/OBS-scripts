@@ -52,7 +52,8 @@ class CountdownToSleep:
         minutes = f'{int(minutes):02}'
         seconds = f'{int(seconds):02}'
          
-       
+        hours += 1 # Client request
+
         if '{time}' in Data._format_:
             countdown = str.replace(countdown, '{time}', f'{hours}')
 
