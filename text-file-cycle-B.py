@@ -12,7 +12,7 @@ class TextCycler:
     def __init__(self, source_name=None):
 
         self.lines = [x for x in open(
-            'C:/Users/Isabelle/iCloudDrive/01 Design/personal OBS graphics/OBS-scripts/input-B.txt',
+            'C:/Users/Isabelle/iCloudDrive/01 Design/Bristol RPG Hangout/eyh stream/OBS-scripts/input-B.txt',
 #            'C:/Users/robmd/Actual Local Files/GitHub/OBS-scripts/input-B.txt',
             'r',
             encoding='utf-8'
