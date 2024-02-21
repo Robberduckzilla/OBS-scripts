@@ -11,9 +11,7 @@ warnings.filterwarnings("ignore")
 class DonationAmount:
     def __init__(self, source_name=None):
         self.source_name = source_name
-        self.url = (
-            "https://www.justgiving.com/page/mount-kilimanjaro-for-cancer-research"
-        )
+        self.url = "https://justgiving.com/page/heroeswantedadventures"
         self.class_name = "cp-heading-large branded-text"
         self.lastAmount = ""
 
@@ -52,7 +50,7 @@ callback = donation_tracker.update_text
 
 def start_timer():
     obs.timer_remove(callback)
-    obs.timer_add(callback, 1 * 1000)
+    obs.timer_add(callback, 1 * 5000)
     Data._timerRunning_ = True
 
 
