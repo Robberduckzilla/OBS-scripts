@@ -1,27 +1,26 @@
-
 import obspython as obs
 from datetime import datetime
+
 
 class BreakTimer:
     def __init__(self, source_name=None, timer_duration=None):
         self.source_name = source_name
-        self.lastCount = ''
-
+        self.lastCount = ""
 
     def update_text(self, force=False):
         source = obs.obs_get_source_by_name(self.source_name)
         if source is not None:
-           
+
             if Data._timerRunning_:
-                text_output = datetime.now().strftime('%I:%M%p')
+                text_output = datetime.now().strftime("%I:%M%p")
 
             # prevent more work being done than necessary
-            if(text_output == self.lastCount and not force):
+            if text_output == self.lastCount and not force:
                 return
             self.lastCount = text_output
 
             settings = obs.obs_data_create()
-            obs.obs_data_set_string(settings, 'text', text_output)
+            obs.obs_data_set_string(settings, "text", text_output)
             obs.obs_source_update(source, settings)
             obs.obs_data_release(settings)
             obs.obs_source_release(source)
@@ -52,15 +51,15 @@ def start_pressed(props, prop):
 
 
 def script_update(settings):
-    break_timer.source_name = obs.obs_data_get_string(settings, 'source')
+    break_timer.source_name = obs.obs_data_get_string(settings, "source")
 
 
 def script_properties():
     props = obs.obs_properties_create()
     p = obs.obs_properties_add_list(
         props,
-        'source',
-        'Text Source:',
+        "source",
+        "Text Source:",
         obs.OBS_COMBO_TYPE_EDITABLE,
         obs.OBS_COMBO_FORMAT_STRING,
     )
@@ -69,14 +68,13 @@ def script_properties():
     if sources is not None:
         for source in sources:
             source_id = obs.obs_source_get_unversioned_id(source)
-            if source_id == 'text_gdiplus' or source_id == 'text_ft2_source':
+            if source_id == "text_gdiplus" or source_id == "text_ft2_source":
                 name = obs.obs_source_get_name(source)
                 obs.obs_property_list_add_string(p, name, name)
 
         obs.source_list_release(sources)
 
-    obs.obs_properties_add_button(
-        props, 'start_button', 'Show Clock', start_pressed)
+    obs.obs_properties_add_button(props, "start_button", "Show Clock", start_pressed)
 
     return props
 
