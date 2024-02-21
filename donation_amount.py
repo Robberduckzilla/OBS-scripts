@@ -1,15 +1,21 @@
+import warnings
 from datetime import datetime
 
 import obspython as obs
 import requests
 from bs4 import BeautifulSoup
 
+warnings.filterwarnings("ignore")
+
 
 class DonationAmount:
     def __init__(self, source_name=None):
         self.source_name = source_name
-        self.url = "https://justgiving.com/page/heroeswantedadventures"
+        self.url = (
+            "https://www.justgiving.com/page/mount-kilimanjaro-for-cancer-research"
+        )
         self.class_name = "cp-heading-large branded-text"
+        self.lastAmount = ""
 
     def update_text(self, force=False):
         source = obs.obs_get_source_by_name(self.source_name)
@@ -21,12 +27,11 @@ class DonationAmount:
                 amount = soup.find_all("div", {"class": f"{self.class_name}"})[
                     0
                 ].contents
-                text_output = amount
-
+                text_output = str(amount[0])
             # prevent more work being done than necessary
-            if text_output == self.lastCount and not force:
+            if text_output == self.lastAmount and not force:
                 return
-            self.lastCount = text_output
+            self.lastAmount = text_output
 
             settings = obs.obs_data_create()
             obs.obs_data_set_string(settings, "text", text_output)
