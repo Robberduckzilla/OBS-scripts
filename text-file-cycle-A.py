@@ -11,7 +11,8 @@ class TextCycler:
         self.lines = [
             x
             for x in open(
-                "/Users/rob/Documents/GitHub/OBS-scripts/input-A.txt",
+                "/Users/isabelle/Library/Mobile Documents/com~apple~CloudDocs/04 Projects/heroes wanted/projects/gaming for good/StreamLabs Assets/OBS-scripts/input-A.txt"
+                #"/Users/rob/Documents/GitHub/OBS-scripts/input-A.txt",
                 "r",
                 encoding="utf-8",
             ).readlines()
