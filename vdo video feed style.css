@@ -1,0 +1,14 @@
+.tile {
+    margin-top: 10vh !important;
+    max-height: 90vh!important;
+  }
+  
+  .video-label {
+      bottom:unset;
+      top:0;
+      text-align:middle;
+      left:unset;
+      background:unset;
+      text-shadow : 0 0 10px #035;
+      font-size: 7vh!important;
+  }
