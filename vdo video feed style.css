@@ -1,14 +1,18 @@
+body { background-color: rgba(0, 0, 0, 0); margin: auto; overflow: hidden;background-image: url("https://i.imgur.com/SWChmTh.jpeg"); background-size: cover; background-position: center;}
+
 .tile {
-    margin-top: 10vh !important;
-    max-height: 90vh!important;
-  }
-  
-  .video-label {
-      bottom:unset;
-      top:0;
-      text-align:middle;
-      left:unset;
-      background:unset;
-      text-shadow : 0 0 10px #035;
-      font-size: 7vh!important;
-  }
+  margin-bottom: 10vh !important;
+  max-height: 90vh!important;
+}
+
+.video-label {
+	padding:5 30 5 30;
+	border-radius:15px;
+	bottom:0;
+	top:unset;
+	text-align:middle;
+	left:unset;
+	background: #12334f;
+	font-size: 8vh!important;
+	font-family: Bungee;
+}
