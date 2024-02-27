@@ -1,0 +1,18 @@
+body { background-color: rgba(0, 0, 0, 0); margin: auto; overflow: hidden;background-image: url("https://i.imgur.com/SWChmTh.jpeg"); background-size: cover; background-position: center;}
+
+.tile {
+  margin-bottom: 10vh !important;
+  max-height: 90vh!important;
+}
+
+.video-label {
+	padding:5 30 5 30;
+	border-radius:15px;
+	bottom:0;
+	top:unset;
+	text-align:middle;
+	left:unset;
+	background: #12334f;
+	font-size: 8vh!important;
+	font-family: Bungee;
+}
