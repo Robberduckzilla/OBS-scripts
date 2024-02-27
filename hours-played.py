@@ -1,9 +1,6 @@
-# Author:   Robberduckzilla
-# Version:  0.1
+from datetime import datetime
 
 import obspython as obs
-from pathlib import Path
-from datetime import datetime
 
 
 class CountdownToSleep:
@@ -35,26 +32,20 @@ class CountdownToSleep:
         countdown = Data._format_
 
         # calculate total seconds until the date
-        time_until_sleep = int(
+        seconds_elapsed = int(
             (datetime.now() - datetime(2024, 3, 9, 12, 0, 0)).total_seconds()
         )
         # prevent negative seconds
-        if time_until_sleep <= 0:
-            time_until_sleep = 0
+        if seconds_elapsed <= 0:
+            seconds_elapsed = 0
 
         # turn seconds into hours and minutes
-        hours, remainder = divmod(time_until_sleep, 3600)
-        minutes, seconds = divmod(remainder, 60)
-
-        hours += 1  # Client request
-
-        # format hours minutes and seconds into two-digit strings(e.g. '04' instead of '4')
-        hours = f"{int(hours):02}"
-        minutes = f"{int(minutes):02}"
-        seconds = f"{int(seconds):02}"
+        hours, remainder = divmod(seconds_elapsed, 3600)
+        # hours += 1  # Client request
+        hours = f"{int(hours)}"
 
         if "{time}" in Data._format_:
-            countdown = str.replace(countdown, "{time}", f"{hours}:{minutes}:{seconds}")
+            countdown = str.replace(countdown, "{time}", f"{hours}")
 
         return countdown
 

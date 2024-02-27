@@ -1,18 +1,20 @@
 # Author:   Robberduckzilla
-# Version:  0.1b
+# Version:  1.0
+
+import random
+import os
 
 import obspython as obs
-import random
 
 
 class TextCycler:
     def __init__(self, source_name=None):
 
+        path_to_file = os.path.join(os.path.dirname(__file__), "input-A.txt")
         self.lines = [
             x
             for x in open(
-                "/Users/isabelle/Library/Mobile Documents/com~apple~CloudDocs/04 Projects/heroes wanted/projects/gaming for good/StreamLabs Assets/OBS-scripts/input-A.txt",
-                #"/Users/rob/Documents/GitHub/OBS-scripts/input-A.txt",
+                path_to_file,
                 "r",
                 encoding="utf-8",
             ).readlines()
