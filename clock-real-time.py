@@ -12,7 +12,7 @@ class BreakTimer:
         if source is not None:
 
             if Data._timerRunning_:
-                text_output = datetime.now().strftime("%I:%M%p")
+                text_output = datetime.now().strftime("%I:%M %p")
 
             # prevent more work being done than necessary
             if text_output == self.lastCount and not force:
