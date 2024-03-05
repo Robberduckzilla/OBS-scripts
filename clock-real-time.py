@@ -35,15 +35,10 @@ class Data:
 break_timer = BreakTimer()
 callback = break_timer.update_text
 
-
 def start_timer():
     obs.timer_remove(callback)
     obs.timer_add(callback, 1 * 1000)
     Data._timerRunning_ = True
-
-
-def stop_timer():
-    Data._timerRunning_ = False
 
 
 def start_pressed(props, prop):
@@ -74,8 +69,7 @@ def script_properties():
 
         obs.source_list_release(sources)
 
-    obs.obs_properties_add_button(props, "start_button", "Show Clock", start_pressed)
-
+    start_timer()
     return props
 
 
