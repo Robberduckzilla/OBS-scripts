@@ -1,8 +1,5 @@
-# Author:   Robberduckzilla
-# Version:  1.0
-
-import random
 import os
+import random
 
 import obspython as obs
 

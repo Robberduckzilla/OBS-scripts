@@ -1,9 +1,6 @@
-# Author:   Robberduckzilla
-# Version:  0.1
+from datetime import datetime
 
 import obspython as obs
-from pathlib import Path
-from datetime import datetime
 
 
 class CountdownToSleep:
