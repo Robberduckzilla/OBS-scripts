@@ -119,7 +119,8 @@ def script_properties():
     obs.obs_properties_add_int_slider(
         props, "seconds_between_lines", "Seconds Between:", 1, 60, 1
     )
-    start_timer()
+    obs.obs_properties_add_button(props, "start_button", "Start Cycling", start_pressed)
+
     return props
 
 
