@@ -86,7 +86,8 @@ def script_properties():
 
         obs.source_list_release(sources)
 
-    start_timer()
+    obs.obs_properties_add_button(props, "start_button", "Start Stuff", start_pressed)
+
     return props
 
 
