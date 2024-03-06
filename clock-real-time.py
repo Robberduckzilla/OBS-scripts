@@ -35,6 +35,7 @@ class Data:
 break_timer = BreakTimer()
 callback = break_timer.update_text
 
+
 def start_timer():
     obs.timer_remove(callback)
     obs.timer_add(callback, 1 * 1000)
