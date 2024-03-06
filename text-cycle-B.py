@@ -120,7 +120,7 @@ def script_properties():
         props, "seconds_between_lines", "Seconds Between:", 1, 60, 1
     )
     obs.obs_properties_add_button(props, "start_button", "Start Cycling", start_pressed)
-
+    start_timer()
     return props
 
 
