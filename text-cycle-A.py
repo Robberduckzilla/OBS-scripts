@@ -106,7 +106,11 @@ def script_properties():
     if sources is not None:
         for source in sources:
             source_id = obs.obs_source_get_unversioned_id(source)
-            if source_id == "text_gdiplus" or source_id == "text_ft2_source":
+            if (
+                source_id == "text_gdiplus"
+                or source_id == "text_ft2_source"
+                or source_id == "markdown_source"
+            ):
                 name = obs.obs_source_get_name(source)
                 obs.obs_property_list_add_string(p, name, name)
 
