@@ -75,4 +75,4 @@ def script_properties():
 
 
 def script_load(settings):
-    pass
+    start_timer()

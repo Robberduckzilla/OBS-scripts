@@ -146,3 +146,4 @@ def script_load(settings):
 
     obs.obs_data_set_string(settings, "format", Data._format_)
     obs.obs_data_set_bool(settings, "auto_start", Data._autoStart_)
+    start_timer()
