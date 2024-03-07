@@ -62,7 +62,7 @@ class Data:
     _format_ = _defaultFormat_
     _autoStart_ = True
     _timerRunning_ = True
-    _timeBetweenMessages_ = 4
+    _timeBetweenMessages_ = 1
 
 
 text_cycler = TextCycler()
@@ -129,3 +129,4 @@ def script_load(settings):
 
     obs.obs_data_set_string(settings, "format", Data._format_)
     obs.obs_data_set_int(settings, "seconds_between_lines", Data._timeBetweenMessages_)
+    start_timer()
