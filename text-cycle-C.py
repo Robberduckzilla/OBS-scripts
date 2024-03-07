@@ -62,7 +62,7 @@ class Data:
     _format_ = _defaultFormat_
     _autoStart_ = True
     _timerRunning_ = True
-    _timeBetweenMessages_ = 1
+    _timeBetweenMessages_ = 4
 
 
 text_cycler = TextCycler()
